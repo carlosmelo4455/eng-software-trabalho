@@ -1,24 +1,24 @@
-package org.biblioteca.model;
+package org.biblioteca.domain.usuario;
 
-public class AlunoGraduacao extends Usuario {
+public class Professor extends Usuario {
 
-    public AlunoGraduacao(String codigo, String nome) {
+    public Professor(String codigo, String nome) {
         super(codigo, nome);
     }
 
     @Override
     public int getLimiteEmprestimos() {
-        return 3;
+        return Integer.MAX_VALUE;
     }
 
     @Override
     public int getTempoEmprestimo() {
-        return 3;
+        return 7;
     }
 
     @Override
     public boolean podeEmprestar() {
-        // Implementar lógica pra isso
+        // Implementar lógica
         return true;
     }
 }

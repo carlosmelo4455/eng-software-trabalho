@@ -1,4 +1,6 @@
-package org.biblioteca.model;
+package org.biblioteca.domain.notificacao;
+
+import org.biblioteca.domain.livro.Livro;
 
 public class Notificacao {
     private final Livro livro;

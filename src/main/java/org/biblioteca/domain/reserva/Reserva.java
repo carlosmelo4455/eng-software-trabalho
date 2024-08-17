@@ -1,11 +1,16 @@
-package org.biblioteca.model;
+package org.biblioteca.domain.reserva;
+
+import org.biblioteca.config.model.Identity;
+import org.biblioteca.domain.livro.Livro;
+import org.biblioteca.domain.usuario.Usuario;
 
 import java.time.LocalDate;
 
-public class Reserva {
+public class Reserva implements Identity<Long> {
     private final Usuario usuario;
     private final Livro livro;
     private final LocalDate dataReserva;
+    private Long id;
 
     public Reserva(Usuario usuario, Livro livro) {
         this.usuario = usuario;
@@ -23,5 +28,15 @@ public class Reserva {
 
     public LocalDate getDataReserva() {
         return dataReserva;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 }

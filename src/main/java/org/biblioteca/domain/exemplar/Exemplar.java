@@ -1,8 +1,12 @@
-package org.biblioteca.model;
+package org.biblioteca.domain.exemplar;
 
-public class Exemplar {
+import org.biblioteca.config.model.Identity;
+import org.biblioteca.domain.livro.Livro;
+
+public class Exemplar implements Identity<String> {
+
     private final Livro livro;
-    private final String codigoExemplar;
+    private String codigoExemplar;
     private boolean disponivel;
 
     public Exemplar(Livro livro, String codigoExemplar) {
@@ -15,15 +19,21 @@ public class Exemplar {
         return livro;
     }
 
-    public String getCodigoExemplar() {
-        return codigoExemplar;
-    }
-
     public boolean isDisponivel() {
         return disponivel;
     }
 
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
+    }
+
+    @Override
+    public String getId() {
+        return codigoExemplar;
+    }
+
+    @Override
+    public void setId(String codigoExemplar) {
+        this.codigoExemplar = codigoExemplar;
     }
 }

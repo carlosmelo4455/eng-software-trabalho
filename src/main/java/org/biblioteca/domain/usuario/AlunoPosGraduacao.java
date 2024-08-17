@@ -1,4 +1,4 @@
-package org.biblioteca.model;
+package org.biblioteca.domain.usuario;
 
 public class AlunoPosGraduacao extends Usuario {
 

@@ -1,4 +1,7 @@
-package org.biblioteca.model;
+package org.biblioteca.domain.emprestimo;
+
+import org.biblioteca.domain.exemplar.Exemplar;
+import org.biblioteca.domain.usuario.Usuario;
 
 import java.time.LocalDate;
 

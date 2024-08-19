@@ -18,6 +18,16 @@ public class Reserva implements Identity<Long> {
         this.dataReserva = LocalDate.now();
     }
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -30,13 +40,5 @@ public class Reserva implements Identity<Long> {
         return dataReserva;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

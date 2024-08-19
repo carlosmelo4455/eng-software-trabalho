@@ -49,11 +49,6 @@ public class CacheRepositoryImpl<T extends Identity<ID>, ID> implements CacheRep
     }
 
     @Override
-    public void deleteById(ID id) {
-        store.remove(id);
-    }
-
-    @Override
     public void delete(T entity) {
         store.values().remove(entity);
     }

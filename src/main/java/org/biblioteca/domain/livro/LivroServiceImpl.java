@@ -19,27 +19,27 @@ public class LivroServiceImpl implements LivroService {
     }
 
     @Override
-    public Livro adicionarLivro(Livro livro) {
+    public Livro adicionar(Livro livro) {
         return livroRepository.save(livro);
     }
 
     @Override
-    public Optional<Livro> buscarLivroPorCodigo(String codigo) {
+    public Optional<Livro> buscarPorId(String codigo) {
         return livroRepository.findById(codigo);
     }
 
     @Override
-    public List<Livro> listarTodosLivros() {
+    public List<Livro> listarTodos() {
         return livroRepository.findAll();
     }
 
     @Override
-    public Livro atualizarLivro(Livro livroAtualizado) {
+    public Livro atualizar(Livro livroAtualizado) {
         return livroRepository.update(livroAtualizado);
     }
 
     @Override
-    public void removerLivro(Livro livro) {
+    public void remover(Livro livro) {
         livroRepository.delete(livro);
     }
 }

@@ -19,27 +19,27 @@ public class ExemplarServiceImpl implements ExemplarService {
     }
 
     @Override
-    public Exemplar adicionarExemplar(Exemplar exemplar) {
+    public Exemplar adicionar(Exemplar exemplar) {
         return exemplarRepository.save(exemplar);
     }
 
     @Override
-    public Optional<Exemplar> buscarExemplarPorCodigo(String codigo) {
+    public Optional<Exemplar> buscarPorId(String codigo) {
         return exemplarRepository.findById(codigo);
     }
 
     @Override
-    public List<Exemplar> listarTodosExemplares() {
+    public List<Exemplar> listarTodos() {
         return exemplarRepository.findAll();
     }
 
     @Override
-    public Exemplar atualizarExemplar(Exemplar exemplar) {
+    public Exemplar atualizar(Exemplar exemplar) {
         return exemplarRepository.update(exemplar);
     }
 
     @Override
-    public void removerExemplar(Exemplar exemplar) {
+    public void remover(Exemplar exemplar) {
         exemplarRepository.delete(exemplar);
     }
 }

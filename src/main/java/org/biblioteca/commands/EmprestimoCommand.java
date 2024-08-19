@@ -1,7 +1,5 @@
 package org.biblioteca.commands;
 
-import org.biblioteca.domain.emprestimo.EmprestimoService;
-
 public class EmprestimoCommand implements Command {
     private final EmprestimoService emprestimoService;
     private final String codigoUsuario;

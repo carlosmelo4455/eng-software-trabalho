@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioService {
-    Usuario cadastrarUsuario(Usuario usuario);
+    Usuario adicionar(Usuario usuario);
 
-    Optional<Usuario> buscarUsuarioPorCodigo(String codigo);
+    Optional<Usuario> buscarPorId(String codigo);
 
-    List<Usuario> listarTodosUsuarios();
+    List<Usuario> listarTodos();
 
-    Usuario atualizarUsuario(Usuario usuarioAtualizado);
+    Usuario atualizar(Usuario usuarioAtualizado);
 
-    void removerUsuario(Usuario usuario);
+    void remover(Usuario usuario);
 }

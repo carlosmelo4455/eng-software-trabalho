@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReservaService {
-    Reserva adicionarReserva(Reserva reserva);
+    Reserva adicionar(Reserva reserva);
 
-    Optional<Reserva> buscarReservaPorId(Long id);
+    Optional<Reserva> buscarPorId(Long id);
 
-    List<Reserva> listarTodasReservas();
+    List<Reserva> listarTodos();
 
-    Reserva atualizarReserva(Reserva reserva);
+    Reserva atualizar(Reserva reserva);
 
-    void removerReserva(Reserva reserva);
+    void remover(Reserva reserva);
 }

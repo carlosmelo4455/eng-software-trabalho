@@ -18,27 +18,27 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario cadastrarUsuario(Usuario usuario) {
+    public Usuario adicionar(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
     @Override
-    public Optional<Usuario> buscarUsuarioPorCodigo(String codigo) {
+    public Optional<Usuario> buscarPorId(String codigo) {
         return usuarioRepository.findById(codigo);
     }
 
     @Override
-    public List<Usuario> listarTodosUsuarios() {
+    public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
     }
 
     @Override
-    public Usuario atualizarUsuario(Usuario usuarioAtualizado) {
+    public Usuario atualizar(Usuario usuarioAtualizado) {
         return usuarioRepository.update(usuarioAtualizado);
     }
 
     @Override
-    public void removerUsuario(Usuario usuario) {
+    public void remover(Usuario usuario) {
         usuarioRepository.delete(usuario);
     }
 }

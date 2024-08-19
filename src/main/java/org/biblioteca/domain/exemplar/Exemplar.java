@@ -15,6 +15,16 @@ public class Exemplar implements Identity<String> {
         this.disponivel = true;
     }
 
+    @Override
+    public String getId() {
+        return codigoExemplar;
+    }
+
+    @Override
+    public void setId(String codigoExemplar) {
+        this.codigoExemplar = codigoExemplar;
+    }
+
     public Livro getLivro() {
         return livro;
     }
@@ -27,13 +37,5 @@ public class Exemplar implements Identity<String> {
         this.disponivel = disponivel;
     }
 
-    @Override
-    public String getId() {
-        return codigoExemplar;
-    }
 
-    @Override
-    public void setId(String codigoExemplar) {
-        this.codigoExemplar = codigoExemplar;
-    }
 }

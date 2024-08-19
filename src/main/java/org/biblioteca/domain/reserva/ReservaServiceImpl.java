@@ -20,27 +20,27 @@ public class ReservaServiceImpl implements ReservaService {
 
 
     @Override
-    public Reserva adicionarReserva(Reserva reserva) {
+    public Reserva adicionar(Reserva reserva) {
         return reservaRepository.save(reserva);
     }
 
     @Override
-    public Optional<Reserva> buscarReservaPorId(Long id) {
+    public Optional<Reserva> buscarPorId(Long id) {
         return reservaRepository.findById(id);
     }
 
     @Override
-    public List<Reserva> listarTodasReservas() {
+    public List<Reserva> listarTodos() {
         return reservaRepository.findAll();
     }
 
     @Override
-    public Reserva atualizarReserva(Reserva reserva) {
+    public Reserva atualizar(Reserva reserva) {
         return reservaRepository.update(reserva);
     }
 
     @Override
-    public void removerReserva(Reserva reserva) {
+    public void remover(Reserva reserva) {
         reservaRepository.delete(reserva);
     }
 }

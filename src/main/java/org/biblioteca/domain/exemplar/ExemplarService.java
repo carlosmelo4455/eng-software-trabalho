@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ExemplarService {
-    Exemplar adicionarExemplar(Exemplar livro);
+    Exemplar adicionar(Exemplar livro);
 
-    Optional<Exemplar> buscarExemplarPorCodigo(String codigo);
+    Optional<Exemplar> buscarPorId(String codigo);
 
-    List<Exemplar> listarTodosExemplares();
+    List<Exemplar> listarTodos();
 
-    Exemplar atualizarExemplar(Exemplar exemplar);
+    Exemplar atualizar(Exemplar exemplar);
 
-    void removerExemplar(Exemplar livro);
+    void remover(Exemplar livro);
 }

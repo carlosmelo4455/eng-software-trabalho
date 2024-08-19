@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LivroService {
-    Livro adicionarLivro(Livro livro);
+    Livro adicionar(Livro livro);
 
-    Optional<Livro> buscarLivroPorCodigo(String codigo);
+    Optional<Livro> buscarPorId(String codigo);
 
-    List<Livro> listarTodosLivros();
+    List<Livro> listarTodos();
 
-    Livro atualizarLivro(Livro livroAtualizado);
+    Livro atualizar(Livro livroAtualizado);
 
-    void removerLivro(Livro livro);
+    void remover(Livro livro);
 }

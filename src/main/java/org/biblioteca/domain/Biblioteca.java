@@ -46,6 +46,7 @@ public class Biblioteca {
             }
         }
 
+
         //verificar o limite de emprestimos do usuario, professores podem pegar quantos livros quiserem,
         if (usuario.getLimiteEmprestimos() <= emprestimos.size()) {
             throw new Exception("Usuário atingiu o limite de empréstimos.");

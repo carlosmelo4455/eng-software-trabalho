@@ -42,4 +42,32 @@ public class ExemplarServiceImpl implements ExemplarService {
     public void remover(Exemplar exemplar) {
         exemplarRepository.delete(exemplar);
     }
+
+    @Override
+    public List<Exemplar> buscarExemplaresPorCodigoLivro(String codigoLivro) {
+        return exemplarRepository.findExemplaresPorCodigoLivro(codigoLivro);
+    }
+
+    @Override
+    public Optional<Livro> buscarLivroPorCodigo(String codigoLivro) {
+        return Optional.ofNullable(exemplarRepository.findLivroPorCodigo(codigoLivro));
+    }
+
+    @Override
+    public void atualizarStatusExemplar(String codigoExemplar, boolean disponivel) {
+        exemplarRepository.findById(codigoExemplar).ifPresent(exemplar -> {
+            exemplar.setDisponivel(disponivel);
+            exemplarRepository.update(exemplar);
+        });
+    }
+
+    @Override
+    public boolean existeLivro(String codigoLivro) {
+        return !exemplarRepository.findExemplaresPorCodigoLivro(codigoLivro).isEmpty();
+    }
+
+    @Override
+    public List<Exemplar> buscarExemplaresDisponiveisPorCodigoLivro(String codigoLivro) {
+        return exemplarRepository.findExemplaresDisponiveisPorCodigoLivro(codigoLivro);
+    }
 }

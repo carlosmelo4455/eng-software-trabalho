@@ -2,8 +2,6 @@ package org.biblioteca.domain.usuario;
 
 public class AlunoGraduacao extends Usuario {
 
-    private String codigo;
-
     public AlunoGraduacao(String codigo, String nome) {
         super(codigo, nome);
     }
@@ -29,9 +27,8 @@ public class AlunoGraduacao extends Usuario {
     }
 
     @Override
-    public boolean podeEmprestar() {
-        // Implementar lógica pra isso
-        return true;
+    public boolean podePegarEmprestado() {
+        return false;
     }
 
     @Override

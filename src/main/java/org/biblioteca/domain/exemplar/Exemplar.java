@@ -1,7 +1,6 @@
 package org.biblioteca.domain.exemplar;
 
 import org.biblioteca.config.model.Identity;
-import org.biblioteca.domain.livro.Livro;
 
 public class Exemplar implements Identity<String> {
 
@@ -36,6 +35,4 @@ public class Exemplar implements Identity<String> {
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
     }
-
-
 }

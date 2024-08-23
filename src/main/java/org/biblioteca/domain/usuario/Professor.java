@@ -17,8 +17,7 @@ public class Professor extends Usuario {
     }
 
     @Override
-    public boolean podeEmprestar() {
-        // Implementar lógica
+    public boolean podePegarEmprestado() {
         return true;
     }
 }

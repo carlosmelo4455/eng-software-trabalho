@@ -1,8 +1,6 @@
-package org.biblioteca.domain.livro;
+package org.biblioteca.domain.exemplar;
 
-import org.biblioteca.config.model.Identity;
-
-public class Livro implements Identity<String> {
+public class Livro {
     private String codigo;
     private String titulo;
     private String editora;
@@ -19,11 +17,11 @@ public class Livro implements Identity<String> {
         this.anoPublicacao = anoPublicacao;
     }
 
-    public String getId() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setId(String codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

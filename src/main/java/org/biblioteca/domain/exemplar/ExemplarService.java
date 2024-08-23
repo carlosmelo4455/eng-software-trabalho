@@ -13,4 +13,15 @@ public interface ExemplarService {
     Exemplar atualizar(Exemplar exemplar);
 
     void remover(Exemplar livro);
+
+    List<Exemplar> buscarExemplaresPorCodigoLivro(String codigoLivro);
+
+    Optional<Livro> buscarLivroPorCodigo(String codigoLivro);
+
+    void atualizarStatusExemplar(String codigoExemplar, boolean disponivel);
+
+    boolean existeLivro(String codigoLivro);
+
+    List<Exemplar> buscarExemplaresDisponiveisPorCodigoLivro(String codigoLivro);
+
 }

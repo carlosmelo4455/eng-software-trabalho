@@ -42,4 +42,14 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     public void remover(Emprestimo emprestimo) {
         emprestimoRepository.delete(emprestimo);
     }
+
+    @Override
+    public Optional<Emprestimo> buscarEmprestimoPorCodigoUsuarioECodigoLivro(String codigoUsuario, String codigoLivro) {
+        return emprestimoRepository.findEmprestimoPorCodigoUsuarioAndCodigoLivro(codigoUsuario, codigoLivro);
+    }
+
+    @Override
+    public List<Emprestimo> buscarEmprestimosPorCodigoUsuario(String codigoUsuario) {
+        return emprestimoRepository.buscarEmprestimosPorCodigoUsuario(codigoUsuario);
+    }
 }

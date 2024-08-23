@@ -1,19 +1,18 @@
-package org.biblioteca.domain.reserva;
+package org.biblioteca.domain.historico;
 
 import org.biblioteca.config.model.Identity;
-import org.biblioteca.domain.exemplar.Exemplar;
 import org.biblioteca.domain.exemplar.Livro;
 import org.biblioteca.domain.usuario.Usuario;
 
 import java.time.LocalDate;
 
-public class Reserva implements Identity<Long> {
+public class Historico implements Identity<Long> {
     private final Usuario usuario;
     private final Livro livro;
     private final LocalDate dataReserva;
     private Long id;
 
-    public Reserva(Usuario usuario, Livro Livro) {
+    public Historico(Usuario usuario, Livro Livro) {
         this.usuario = usuario;
         this.livro = Livro;
         this.dataReserva = LocalDate.now();

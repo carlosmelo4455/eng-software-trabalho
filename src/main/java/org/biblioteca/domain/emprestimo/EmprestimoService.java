@@ -13,4 +13,8 @@ public interface EmprestimoService {
     Emprestimo atualizar(Emprestimo emprestimo);
 
     void remover(Emprestimo emprestimo);
+
+    Optional<Emprestimo> buscarEmprestimoPorCodigoUsuarioECodigoLivro(String codigoUsuario, String codigoLivro);
+
+    List<Emprestimo> buscarEmprestimosPorCodigoUsuario(String codigoUsuario);
 }

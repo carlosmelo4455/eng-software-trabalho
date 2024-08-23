@@ -13,4 +13,5 @@ public interface UsuarioService {
     Usuario atualizar(Usuario usuarioAtualizado);
 
     void remover(Usuario usuario);
+
 }

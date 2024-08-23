@@ -17,8 +17,7 @@ public class AlunoPosGraduacao extends Usuario {
     }
 
     @Override
-    public boolean podeEmprestar() {
-        // Implementar lógica
-        return true;
+    public boolean podePegarEmprestado() {
+        return false;
     }
 }

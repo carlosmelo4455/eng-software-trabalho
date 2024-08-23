@@ -1,7 +1,7 @@
 package org.biblioteca.domain.notificacao;
 
 import org.biblioteca.config.model.Identity;
-import org.biblioteca.domain.livro.Livro;
+import org.biblioteca.domain.exemplar.Livro;
 
 public class Notificacao implements Identity<Long> {
 

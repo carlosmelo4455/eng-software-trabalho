@@ -31,6 +31,6 @@ public abstract class Usuario implements Identity<String> {
 
     public abstract int getTempoEmprestimo();
 
-    public abstract boolean podeEmprestar();
+    public abstract boolean podePegarEmprestado();
 
 }

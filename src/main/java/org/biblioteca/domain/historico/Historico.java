@@ -2,20 +2,23 @@ package org.biblioteca.domain.historico;
 
 import org.biblioteca.config.model.Identity;
 import org.biblioteca.domain.exemplar.Livro;
+import org.biblioteca.domain.transacao.Transacao;
 import org.biblioteca.domain.usuario.Usuario;
 
 import java.time.LocalDate;
 
-public class Historico implements Identity<Long> {
+public class Historico implements Identity<Long>, Transacao {
     private final Usuario usuario;
     private final Livro livro;
-    private final LocalDate dataReserva;
+    private final LocalDate dataTransacao;
+    private final Acao acao;
     private Long id;
 
-    public Historico(Usuario usuario, Livro Livro) {
-        this.usuario = usuario;
-        this.livro = Livro;
-        this.dataReserva = LocalDate.now();
+    public Historico(Transacao transacao, Acao acao) {
+        this.usuario = transacao.getUsuario();
+        this.livro = transacao.getLivro();
+        this.dataTransacao = transacao.getDataTransacao();
+        this.acao = acao;
     }
 
     @Override
@@ -36,7 +39,18 @@ public class Historico implements Identity<Long> {
         return livro;
     }
 
-    public LocalDate getDataReserva() {
-        return dataReserva;
+    public LocalDate getDataTransacao() {
+        return dataTransacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Historico{" +
+                "usuario=" + usuario +
+                ", livro=" + livro +
+                ", dataTransacao=" + dataTransacao +
+                ", acao=" + acao.getDescricao() +
+                ", id=" + id +
+                '}';
     }
 }

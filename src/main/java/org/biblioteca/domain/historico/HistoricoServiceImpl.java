@@ -2,6 +2,7 @@ package org.biblioteca.domain.historico;
 
 import org.biblioteca.config.singleton.Singleton;
 import org.biblioteca.config.singleton.SingletonManager;
+import org.biblioteca.domain.transacao.Transacao;
 import org.biblioteca.domain.usuario.Professor;
 import org.biblioteca.domain.usuario.Usuario;
 
@@ -44,5 +45,11 @@ public class HistoricoServiceImpl implements HistoricoService {
     @Override
     public void remover(Historico reserva) {
         historicoRepository.delete(reserva);
+    }
+
+    @Override
+    public void salvarNoHistorico(Transacao transacao, Acao acao) {
+        Historico historico = new Historico(transacao, acao);
+        historicoRepository.save(historico);
     }
 }

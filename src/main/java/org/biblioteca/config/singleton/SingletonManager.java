@@ -14,12 +14,14 @@ public final class SingletonManager {
         return (T) instances.computeIfAbsent(clazz, k -> {
             try {
                 if (clazz.isAnnotationPresent(Singleton.class)) {
-                    return clazz.getDeclaredConstructor().newInstance();
+                    var constructor = clazz.getDeclaredConstructor();
+                    constructor.setAccessible(true);
+                    return constructor.newInstance();
                 } else {
-                    throw new RuntimeException("Classe " + clazz.getName() + "não está anotada com @Singleton");
+                    throw new RuntimeException("Classe " + clazz.getName() + " não está anotada com @Singleton");
                 }
             } catch (Exception e) {
-                throw new RuntimeException("erro criando instancia singleton para " + clazz.getName(), e);
+                throw new RuntimeException("Erro criando instancia singleton para " + clazz.getName(), e);
             }
         });
     }

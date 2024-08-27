@@ -1,5 +1,6 @@
 package org.biblioteca.domain.historico;
 
+import org.biblioteca.domain.transacao.Transacao;
 import org.biblioteca.domain.usuario.Usuario;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface HistoricoService {
     Historico atualizar(Historico reserva);
 
     void remover(Historico reserva);
+
+    void salvarNoHistorico(Transacao transacao, Acao acao);
 }

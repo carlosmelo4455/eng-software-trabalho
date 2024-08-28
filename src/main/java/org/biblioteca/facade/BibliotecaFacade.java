@@ -95,10 +95,11 @@ public class BibliotecaFacade {
 
     public void adicionarObservacao(String codigoUsuario, String codigoLivro) {
         Livro livro = buscarLivroPorCodigo(codigoLivro);
+        Usuario usuario = buscarUsuarioPorCodigo(codigoUsuario);
         Observer observer = new LivroObserver(codigoUsuario);
         livro.registrarObserver(observer);
         observadores.put(codigoUsuario, observer);
-        System.out.println("Observador adicionado com sucesso: " + observer.getClass().getSimpleName());
+        System.out.println("Observador adicionado com sucesso: " + usuario.getNome() + " está observando " + livro.getTitulo());
     }
 
     public void consultarInformacoesLivro(String codigoLivro) {

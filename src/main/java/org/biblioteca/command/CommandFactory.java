@@ -12,8 +12,8 @@ public class CommandFactory {
     public Command criarComando(String input) {
         String[] partes = input.split(" ");
         String tipoComando = partes[0];
-        String codigoUsuario = partes.length > 1 ? partes[1] : null;
-        String codigoLivro = partes.length > 2 ? partes[2] : null;
+        String codigo1 = partes.length > 1 ? partes[1] : null;
+        String codigo2 = partes.length > 2 ? partes[2] : null;
 
         ComandoEnum comandoEnum = ComandoEnum.fromString(tipoComando);
         if (comandoEnum == null) {
@@ -21,13 +21,13 @@ public class CommandFactory {
         }
 
         return switch (comandoEnum) {
-            case EMPRESTIMO -> new EmprestimoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-            case RESERVA -> new ReservaCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-            case DEVOLUCAO -> new DevolucaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-            case OBSERVACAO -> new ObservacaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-            case INFORMACOES_LIVRO -> new InformacoesLivroCommand(bibliotecaFacade, codigoLivro);
-            case INFORMACOES_USUARIO -> new InformacoesUsuarioCommand(bibliotecaFacade, codigoUsuario);
-            case NOTIFICACOES -> new NotificacoesCommand(bibliotecaFacade, codigoUsuario);
+            case EMPRESTIMO -> new EmprestimoCommand(bibliotecaFacade, codigo1, codigo2);
+            case RESERVA -> new ReservaCommand(bibliotecaFacade, codigo1, codigo2);
+            case DEVOLUCAO -> new DevolucaoCommand(bibliotecaFacade, codigo1, codigo2);
+            case OBSERVACAO -> new ObservacaoCommand(bibliotecaFacade, codigo1, codigo2);
+            case INFORMACOES_LIVRO -> new InformacoesLivroCommand(bibliotecaFacade, codigo1);
+            case INFORMACOES_USUARIO -> new InformacoesUsuarioCommand(bibliotecaFacade, codigo1);
+            case NOTIFICACOES -> new NotificacoesCommand(bibliotecaFacade, codigo1);
             case SAIR -> new SairCommand();
         };
     }

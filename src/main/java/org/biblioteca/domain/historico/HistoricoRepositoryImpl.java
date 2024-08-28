@@ -15,4 +15,11 @@ public class HistoricoRepositoryImpl extends CacheRepositoryImpl<Historico, Long
     public static HistoricoRepositoryImpl getInstance() {
         return SingletonManager.getInstance(HistoricoRepositoryImpl.class);
     }
+
+    @Override
+    public List<Historico> buscarHistoricosPorUsuarioEAcao(String codigoUsuario, Acao acao) {
+        return store.values().stream()
+                .filter(historico -> historico.getUsuario().getId().equals(codigoUsuario) && historico.getAcao().equals(acao))
+                .toList();
+    }
 }

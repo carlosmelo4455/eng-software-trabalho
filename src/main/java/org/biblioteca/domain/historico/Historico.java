@@ -43,14 +43,7 @@ public class Historico implements Identity<Long>, Transacao {
         return dataTransacao;
     }
 
-    @Override
-    public String toString() {
-        return "Historico{" +
-                "usuario=" + usuario +
-                ", livro=" + livro +
-                ", dataTransacao=" + dataTransacao +
-                ", acao=" + acao.getDescricao() +
-                ", id=" + id +
-                '}';
+    public Acao getAcao() {
+        return acao;
     }
 }

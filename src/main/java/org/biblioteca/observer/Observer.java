@@ -1,4 +1,6 @@
 package org.biblioteca.observer;
 
-public class Observer {
+public interface Observer {
+    void update();
+    int getNotificacoes();
 }

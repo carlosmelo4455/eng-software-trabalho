@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 public interface Transacao {
     Long getId();
-    void setId(Long id);
     Usuario getUsuario();
     Livro getLivro();
     LocalDate getDataTransacao();

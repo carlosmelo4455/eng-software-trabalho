@@ -14,7 +14,6 @@ public class ExemplarServiceImpl extends AbstractService<Exemplar, String> imple
         this.exemplarRepository = exemplarRepository;
     }
 
-
     @Override
     public List<Exemplar> buscarExemplaresPorCodigoLivro(String codigoLivro) {
         return exemplarRepository.findExemplaresPorCodigoLivro(codigoLivro);
@@ -23,19 +22,6 @@ public class ExemplarServiceImpl extends AbstractService<Exemplar, String> imple
     @Override
     public Optional<Livro> buscarLivroPorCodigo(String codigoLivro) {
         return Optional.ofNullable(exemplarRepository.findLivroPorCodigo(codigoLivro));
-    }
-
-    @Override
-    public void atualizarStatusExemplar(String codigoExemplar, boolean disponivel) {
-        exemplarRepository.findById(codigoExemplar).ifPresent(exemplar -> {
-            exemplar.setDisponivel(disponivel);
-            exemplarRepository.update(exemplar);
-        });
-    }
-
-    @Override
-    public boolean existeLivro(String codigoLivro) {
-        return !exemplarRepository.findExemplaresPorCodigoLivro(codigoLivro).isEmpty();
     }
 
     @Override

@@ -4,7 +4,7 @@ import org.biblioteca.config.model.Identity;
 
 public abstract class Usuario implements Identity<String> {
     private String codigo;
-    private String nome;
+    private final String nome;
 
     public Usuario(String codigo, String nome) {
         this.codigo = codigo;
@@ -21,10 +21,6 @@ public abstract class Usuario implements Identity<String> {
 
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public abstract int getLimiteEmprestimos();

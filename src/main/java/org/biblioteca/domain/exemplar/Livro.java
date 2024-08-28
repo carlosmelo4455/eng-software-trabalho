@@ -1,12 +1,20 @@
 package org.biblioteca.domain.exemplar;
 
-public class Livro {
+import org.biblioteca.observer.Observer;
+import org.biblioteca.observer.Subject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Livro implements Subject {
     private String codigo;
     private String titulo;
     private String editora;
     private String[] autores;
     private String edicao;
     private int anoPublicacao;
+    private final List<Observer> observers = new ArrayList<>();
+    private int reservas = 0;
 
     public Livro(String codigo, String titulo, String editora, String[] autores, String edicao, int anoPublicacao) {
         this.codigo = codigo;
@@ -66,4 +74,24 @@ public class Livro {
     }
 
 
+    @Override
+    public void registrarObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notificarObserver() {
+        observers.forEach(Observer::update);
+    }
+
+    public void registrarReserva() {
+        reservas++;
+        if (reservas == 2) {
+            notificarObserver();
+        }
+    }
+
+    public int getReservas() {
+        return reservas;
+    }
 }

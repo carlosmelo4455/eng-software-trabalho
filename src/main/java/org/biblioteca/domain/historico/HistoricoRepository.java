@@ -5,4 +5,5 @@ import org.biblioteca.config.repository.CacheRepository;
 import java.util.List;
 
 public interface HistoricoRepository extends CacheRepository<Historico, Long> {
+    List<Historico> buscarHistoricosPorUsuarioEAcao(String codigoUsuario, Acao acao);
 }

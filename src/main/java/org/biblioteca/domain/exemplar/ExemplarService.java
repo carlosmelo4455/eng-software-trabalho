@@ -11,10 +11,6 @@ public interface ExemplarService extends BaseService<Exemplar, String> {
 
     Optional<Livro> buscarLivroPorCodigo(String codigoLivro);
 
-    void atualizarStatusExemplar(String codigoExemplar, boolean disponivel);
-
-    boolean existeLivro(String codigoLivro);
-
     List<Exemplar> buscarExemplaresDisponiveisPorCodigoLivro(String codigoLivro);
 
 }

@@ -1,7 +1,7 @@
 package org.biblioteca.exception;
 
 public class LimiteReservasExcedidoException extends RuntimeException {
-    public LimiteReservasExcedidoException() {
-        super("Limite de reservas excedido");
+    public LimiteReservasExcedidoException(String message) {
+        super(message);
     }
 }

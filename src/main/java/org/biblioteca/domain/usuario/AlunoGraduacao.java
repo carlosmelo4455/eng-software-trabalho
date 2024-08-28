@@ -7,16 +7,6 @@ public class AlunoGraduacao extends Usuario {
     }
 
     @Override
-    public String getNome() {
-        return "";
-    }
-
-    @Override
-    public void setNome(String nome) {
-
-    }
-
-    @Override
     public int getLimiteEmprestimos() {
         return 3;
     }
@@ -29,15 +19,5 @@ public class AlunoGraduacao extends Usuario {
     @Override
     public boolean podePegarEmprestado() {
         return false;
-    }
-
-    @Override
-    public String getId() {
-        return "";
-    }
-
-    @Override
-    public void setId(String s) {
-
     }
 }

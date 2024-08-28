@@ -1,26 +1,18 @@
 package org.biblioteca.domain.transacao.reserva;
 
+import org.biblioteca.config.service.BaseService;
 import org.biblioteca.domain.usuario.Usuario;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ReservaService {
-    Reserva adicionar(Reserva reserva);
-
-    Optional<Reserva> buscarPorId(Long id);
-
-    List<Reserva> listarTodos();
-
-    Reserva atualizar(Reserva reserva);
-
-    void remover(Reserva reserva);
-
-    boolean podeReservar(Usuario usuario, String codigoLivro);
-
-    Long contarReservasPorUsuario(String codigoUsuario);
+public interface ReservaService extends BaseService<Reserva, Long> {
 
     Optional<Reserva> buscarReservaPorCodigoUsuarioECodigoLivro(String codigoUsuario, String codigoLivro);
 
     List<Reserva> buscarReservasPorCodigoLivro(String codigoLivro);
+
+    void verificarLimiteReservas(String codigoUsuario, int limiteReservas);
+
+    void verificarSeUsuarioTemReservaAtiva(String codigoUsuario, String codigoLivro);
 }

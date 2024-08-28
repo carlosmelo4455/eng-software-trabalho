@@ -13,7 +13,7 @@ public class BibliotecaController {
         this.commandFactory = commandFactory;
     }
 
-    public void iniciar() throws Exception {
+    public void iniciar(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem-vindo à Biblioteca. Digite seu comando:");
 
@@ -21,7 +21,11 @@ public class BibliotecaController {
             String input = scanner.nextLine();
             Command comando = commandFactory.criarComando(input);
             if (comando != null) {
-                comando.execute();
+                try {
+                    comando.execute();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 System.out.println("Comando não reconhecido. Tente novamente.");
             }

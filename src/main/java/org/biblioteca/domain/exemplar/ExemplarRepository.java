@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ExemplarRepository extends CacheRepository<Exemplar, String> {
     List<Exemplar> findExemplaresPorCodigoLivro(String codigoLivro);
+
     Livro findLivroPorCodigo(String codigoLivro);
+
     List<Exemplar> findExemplaresDisponiveisPorCodigoLivro(String codigoLivro);
 }

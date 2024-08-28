@@ -1,4 +1,3 @@
-// CommandFactory.java
 package org.biblioteca.command;
 
 import org.biblioteca.facade.BibliotecaFacade;
@@ -21,13 +20,47 @@ public class CommandFactory {
             return null;
         }
 
-        try {
-            return comandoEnum.getCommandClass()
-                    .getConstructor(BibliotecaFacade.class, String.class, String.class)
-                    .newInstance(bibliotecaFacade, codigoUsuario, codigoLivro);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return switch (comandoEnum) {
+            case EMPRESTIMO -> criarEmprestimoCommand(codigoUsuario, codigoLivro);
+            case RESERVA -> criarReservaCommand(codigoUsuario, codigoLivro);
+            case DEVOLUCAO -> criarDevolucaoCommand(codigoUsuario, codigoLivro);
+            case OBSERVACAO -> criarObservacaoCommand(codigoUsuario, codigoLivro);
+            case INFORMACOES_LIVRO -> criarInformacoesLivroCommand(codigoLivro);
+            case INFORMACOES_USUARIO -> criarInformacoesUsuarioCommand(codigoUsuario);
+            case NOTIFICACOES -> criarNotificacoesCommand(codigoUsuario);
+            case SAIR -> criarSairCommand();
+        };
+    }
+
+    private Command criarEmprestimoCommand(String codigoUsuario, String codigoLivro) {
+        return new EmprestimoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+    }
+
+    private Command criarReservaCommand(String codigoUsuario, String codigoLivro) {
+        return new ReservaCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+    }
+
+    private Command criarDevolucaoCommand(String codigoUsuario, String codigoLivro) {
+        return new DevolucaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+    }
+
+    private Command criarObservacaoCommand(String codigoUsuario, String codigoLivro) {
+        return new ObservacaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+    }
+
+    private Command criarInformacoesLivroCommand(String codigoLivro) {
+        return new InformacoesLivroCommand(bibliotecaFacade, codigoLivro);
+    }
+
+    private Command criarInformacoesUsuarioCommand(String codigoUsuario) {
+        return new InformacoesUsuarioCommand(bibliotecaFacade, codigoUsuario);
+    }
+
+    private Command criarNotificacoesCommand(String codigoUsuario) {
+        return new NotificacoesCommand(bibliotecaFacade, codigoUsuario);
+    }
+
+    private Command criarSairCommand() {
+        return new SairCommand();
     }
 }

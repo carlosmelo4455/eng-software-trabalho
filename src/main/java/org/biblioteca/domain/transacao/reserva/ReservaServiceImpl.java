@@ -1,65 +1,20 @@
 package org.biblioteca.domain.transacao.reserva;
 
-import org.biblioteca.config.singleton.Singleton;
-import org.biblioteca.config.singleton.SingletonManager;
+import org.biblioteca.config.service.AbstractService;
 import org.biblioteca.domain.usuario.Professor;
 import org.biblioteca.domain.usuario.Usuario;
+import org.biblioteca.exception.LimiteReservasExcedidoException;
 
 import java.util.List;
 import java.util.Optional;
 
-@Singleton
-public class ReservaServiceImpl implements ReservaService {
+public class ReservaServiceImpl extends AbstractService<Reserva, Long> implements ReservaService {
 
-    private final ReservaRepository reservaRepository = ReservaRepositoryImpl.getInstance();
+    private final ReservaRepository reservaRepository;
 
-    private ReservaServiceImpl() {
-    }
-
-    public static ReservaServiceImpl getInstance() {
-        return SingletonManager.getInstance(ReservaServiceImpl.class);
-    }
-
-
-    @Override
-    public Reserva adicionar(Reserva reserva) {
-        return reservaRepository.save(reserva);
-    }
-
-    @Override
-    public Optional<Reserva> buscarPorId(Long id) {
-        return reservaRepository.findById(id);
-    }
-
-    @Override
-    public List<Reserva> listarTodos() {
-        return reservaRepository.findAll();
-    }
-
-    @Override
-    public Reserva atualizar(Reserva reserva) {
-        return reservaRepository.update(reserva);
-    }
-
-    @Override
-    public void remover(Reserva reserva) {
-        reservaRepository.delete(reserva);
-    }
-
-    @Override
-    public boolean podeReservar(Usuario usuario, String codigoLivro) {
-        if (usuario.getClass().isInstance(Professor.class)) {
-            return true;
-        } else {
-            return reservaRepository.findAll().stream()
-                    .filter(reserva -> reserva.getUsuario().equals(usuario))
-                    .noneMatch(reserva -> reserva.getLivro().getCodigo().equals(codigoLivro));
-        }
-    }
-
-    @Override
-    public Long contarReservasPorUsuario(String codigoUsuario) {
-        return reservaRepository.contarReservasPorUsuario(codigoUsuario);
+    public ReservaServiceImpl(ReservaRepository reservaRepository) {
+        super(reservaRepository);
+        this.reservaRepository = reservaRepository;
     }
 
     @Override
@@ -70,5 +25,19 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public List<Reserva> buscarReservasPorCodigoLivro(String codigoLivro) {
         return reservaRepository.buscarReservasPorCodigoLivro(codigoLivro);
+    }
+
+    @Override
+    public void verificarLimiteReservas(String codigoUsuario, int limiteReservas) {
+        if (reservaRepository.contarReservasPorUsuario(codigoUsuario) >= limiteReservas) {
+            throw new LimiteReservasExcedidoException("Usuário já possui " + limiteReservas + " reservas ativas.");
+        }
+    }
+
+    @Override
+    public void verificarSeUsuarioTemReservaAtiva(String codigoUsuario, String codigoLivro) {
+        if (reservaRepository.buscarReservaPorCodigoUsuarioECodigoLivro(codigoUsuario, codigoLivro) != null) {
+            throw new LimiteReservasExcedidoException("Usuário já possui uma reserva ativa do livro.");
+        }
     }
 }

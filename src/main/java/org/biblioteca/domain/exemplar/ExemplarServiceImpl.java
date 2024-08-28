@@ -1,47 +1,19 @@
 package org.biblioteca.domain.exemplar;
 
-import org.biblioteca.config.singleton.Singleton;
-import org.biblioteca.config.singleton.SingletonManager;
+import org.biblioteca.config.service.AbstractService;
 
 import java.util.List;
 import java.util.Optional;
 
-@Singleton
-public class ExemplarServiceImpl implements ExemplarService {
+public class ExemplarServiceImpl extends AbstractService<Exemplar, String> implements ExemplarService {
 
-    private final ExemplarRepository exemplarRepository = ExemplarRepositoryImpl.getInstance();
+    private final ExemplarRepository exemplarRepository;
 
-    private ExemplarServiceImpl() {
+    public ExemplarServiceImpl(ExemplarRepository exemplarRepository) {
+        super(exemplarRepository);
+        this.exemplarRepository = exemplarRepository;
     }
 
-    public static ExemplarServiceImpl getInstance() {
-        return SingletonManager.getInstance(ExemplarServiceImpl.class);
-    }
-
-    @Override
-    public Exemplar adicionar(Exemplar exemplar) {
-        return exemplarRepository.save(exemplar);
-    }
-
-    @Override
-    public Optional<Exemplar> buscarPorId(String codigo) {
-        return exemplarRepository.findById(codigo);
-    }
-
-    @Override
-    public List<Exemplar> listarTodos() {
-        return exemplarRepository.findAll();
-    }
-
-    @Override
-    public Exemplar atualizar(Exemplar exemplar) {
-        return exemplarRepository.update(exemplar);
-    }
-
-    @Override
-    public void remover(Exemplar exemplar) {
-        exemplarRepository.delete(exemplar);
-    }
 
     @Override
     public List<Exemplar> buscarExemplaresPorCodigoLivro(String codigoLivro) {
@@ -68,6 +40,10 @@ public class ExemplarServiceImpl implements ExemplarService {
 
     @Override
     public List<Exemplar> buscarExemplaresDisponiveisPorCodigoLivro(String codigoLivro) {
-        return exemplarRepository.findExemplaresDisponiveisPorCodigoLivro(codigoLivro);
+        List<Exemplar> exemplares = exemplarRepository.findExemplaresDisponiveisPorCodigoLivro(codigoLivro);
+        if (exemplares.isEmpty()) {
+            throw new RuntimeException("Não há exemplares disponíveis do livro.");
+        }
+        return exemplares;
     }
 }

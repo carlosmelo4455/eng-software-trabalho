@@ -21,46 +21,14 @@ public class CommandFactory {
         }
 
         return switch (comandoEnum) {
-            case EMPRESTIMO -> criarEmprestimoCommand(codigoUsuario, codigoLivro);
-            case RESERVA -> criarReservaCommand(codigoUsuario, codigoLivro);
-            case DEVOLUCAO -> criarDevolucaoCommand(codigoUsuario, codigoLivro);
-            case OBSERVACAO -> criarObservacaoCommand(codigoUsuario, codigoLivro);
-            case INFORMACOES_LIVRO -> criarInformacoesLivroCommand(codigoLivro);
-            case INFORMACOES_USUARIO -> criarInformacoesUsuarioCommand(codigoUsuario);
-            case NOTIFICACOES -> criarNotificacoesCommand(codigoUsuario);
-            case SAIR -> criarSairCommand();
+            case EMPRESTIMO -> new EmprestimoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+            case RESERVA -> new ReservaCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+            case DEVOLUCAO -> new DevolucaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+            case OBSERVACAO -> new ObservacaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
+            case INFORMACOES_LIVRO -> new InformacoesLivroCommand(bibliotecaFacade, codigoLivro);
+            case INFORMACOES_USUARIO -> new InformacoesUsuarioCommand(bibliotecaFacade, codigoUsuario);
+            case NOTIFICACOES -> new NotificacoesCommand(bibliotecaFacade, codigoUsuario);
+            case SAIR -> new SairCommand();
         };
-    }
-
-    private Command criarEmprestimoCommand(String codigoUsuario, String codigoLivro) {
-        return new EmprestimoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-    }
-
-    private Command criarReservaCommand(String codigoUsuario, String codigoLivro) {
-        return new ReservaCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-    }
-
-    private Command criarDevolucaoCommand(String codigoUsuario, String codigoLivro) {
-        return new DevolucaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-    }
-
-    private Command criarObservacaoCommand(String codigoUsuario, String codigoLivro) {
-        return new ObservacaoCommand(bibliotecaFacade, codigoUsuario, codigoLivro);
-    }
-
-    private Command criarInformacoesLivroCommand(String codigoLivro) {
-        return new InformacoesLivroCommand(bibliotecaFacade, codigoLivro);
-    }
-
-    private Command criarInformacoesUsuarioCommand(String codigoUsuario) {
-        return new InformacoesUsuarioCommand(bibliotecaFacade, codigoUsuario);
-    }
-
-    private Command criarNotificacoesCommand(String codigoUsuario) {
-        return new NotificacoesCommand(bibliotecaFacade, codigoUsuario);
-    }
-
-    private Command criarSairCommand() {
-        return new SairCommand();
     }
 }

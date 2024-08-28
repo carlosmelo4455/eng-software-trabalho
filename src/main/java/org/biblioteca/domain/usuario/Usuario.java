@@ -3,8 +3,8 @@ package org.biblioteca.domain.usuario;
 import org.biblioteca.config.model.Identity;
 
 public abstract class Usuario implements Identity<String> {
-    private String codigo;
     private final String nome;
+    private String codigo;
 
     public Usuario(String codigo, String nome) {
         this.codigo = codigo;

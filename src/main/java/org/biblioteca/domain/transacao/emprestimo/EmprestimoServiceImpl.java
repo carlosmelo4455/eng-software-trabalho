@@ -37,14 +37,14 @@ public class EmprestimoServiceImpl extends AbstractService<Emprestimo, Long> imp
     @Override
     public void verificarSeUsuarioPodeEmprestarMaisLivros(Usuario usuario) {
         List<Emprestimo> emprestimos = emprestimoRepository.buscarEmprestimosPorCodigoUsuario(usuario.getId());
-        if (usuario.getLimiteEmprestimos() < emprestimos.size()){
+        if (usuario.getLimiteEmprestimos() < emprestimos.size()) {
             throw new LimiteEmprestimoExcedidoException();
         }
     }
 
     @Override
     public void verificarSeEmprestimoEstaAtivo(String codigoUsuario, String codigoLivro) {
-        if (emprestimoRepository.findEmprestimoPorCodigoUsuarioAndCodigoLivro(codigoUsuario, codigoLivro).isPresent()){
+        if (emprestimoRepository.findEmprestimoPorCodigoUsuarioAndCodigoLivro(codigoUsuario, codigoLivro).isPresent()) {
             throw new EmprestimoAtivoException();
         }
     }

@@ -1,7 +1,6 @@
 package org.biblioteca.domain.transacao.reserva;
 
 import org.biblioteca.config.model.Identity;
-import org.biblioteca.domain.exemplar.Exemplar;
 import org.biblioteca.domain.exemplar.Livro;
 import org.biblioteca.domain.transacao.Transacao;
 import org.biblioteca.domain.usuario.Usuario;

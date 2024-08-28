@@ -24,7 +24,7 @@ public class EmprestimoComReservaStrategy implements EmprestimoStrategy {
     }
 
     @Override
-    public Emprestimo emprestar(Usuario usuario, Livro livro, List<Exemplar> exemplaresDisponiveis, Reserva reserva){
+    public Emprestimo emprestar(Usuario usuario, Livro livro, List<Exemplar> exemplaresDisponiveis, Reserva reserva) {
         reservaService.remover(reserva);
         Exemplar exemplar = exemplaresDisponiveis.get(0);
         exemplar.setDisponivel(false);

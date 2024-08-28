@@ -1,8 +1,6 @@
 package org.biblioteca.domain.transacao.reserva;
 
 import org.biblioteca.config.service.AbstractService;
-import org.biblioteca.domain.usuario.Professor;
-import org.biblioteca.domain.usuario.Usuario;
 import org.biblioteca.exception.LimiteReservasExcedidoException;
 
 import java.util.List;

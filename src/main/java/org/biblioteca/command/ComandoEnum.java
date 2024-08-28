@@ -2,29 +2,19 @@
 package org.biblioteca.command;
 
 public enum ComandoEnum {
-    EMPRESTIMO("emp", EmprestimoCommand.class),
-    RESERVA("res", ReservaCommand.class),
-    DEVOLUCAO("dev", DevolucaoCommand.class),
-    OBSERVACAO("obs", ObservacaoCommand.class),
-    INFORMACOES_LIVRO("liv", InformacoesLivroCommand.class),
-    INFORMACOES_USUARIO("usu", InformacoesUsuarioCommand.class),
-    NOTIFICACOES("ntf", NotificacoesCommand.class),
-    SAIR("sai", SairCommand.class);
+    EMPRESTIMO("emp"),
+    RESERVA("res"),
+    DEVOLUCAO("dev"),
+    OBSERVACAO("obs"),
+    INFORMACOES_LIVRO("liv"),
+    INFORMACOES_USUARIO("usu"),
+    NOTIFICACOES("ntf"),
+    SAIR("sai");
 
     private final String comando;
-    private final Class<? extends Command> commandClass;
 
-    ComandoEnum(String comando, Class<? extends Command> commandClass) {
+    ComandoEnum(String comando) {
         this.comando = comando;
-        this.commandClass = commandClass;
-    }
-
-    public String getComando() {
-        return comando;
-    }
-
-    public Class<? extends Command> getCommandClass() {
-        return commandClass;
     }
 
     public static ComandoEnum fromString(String comando) {
@@ -34,5 +24,9 @@ public enum ComandoEnum {
             }
         }
         return null;
+    }
+
+    public String getComando() {
+        return comando;
     }
 }

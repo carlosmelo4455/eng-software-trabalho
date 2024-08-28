@@ -79,7 +79,7 @@ public class BibliotecaFacade {
         System.out.println("Reserva realizada com sucesso: " + usuario.getNome() + " reservou o livro :" + livro.getTitulo());
     }
 
-    public void devolverLivro(String codigoUsuario, String codigoLivro){
+    public void devolverLivro(String codigoUsuario, String codigoLivro) {
         Livro livro = buscarLivroPorCodigo(codigoLivro);
         Usuario usuario = buscarUsuarioPorCodigo(codigoUsuario);
         Emprestimo emprestimo = emprestimoService.buscarEmprestimoPorCodigoUsuarioECodigoLivro(codigoUsuario, codigoLivro);

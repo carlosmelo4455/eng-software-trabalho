@@ -1,7 +1,6 @@
 package org.biblioteca.domain.transacao.reserva;
 
 import org.biblioteca.config.service.BaseService;
-import org.biblioteca.domain.usuario.Usuario;
 
 import java.util.List;
 import java.util.Optional;

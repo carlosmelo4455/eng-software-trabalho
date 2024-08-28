@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Livro implements Subject {
+    private final List<Observer> observers = new ArrayList<>();
     private String codigo;
     private String titulo;
     private String editora;
     private String[] autores;
     private String edicao;
     private int anoPublicacao;
-    private final List<Observer> observers = new ArrayList<>();
     private int reservas = 0;
 
     public Livro(String codigo, String titulo, String editora, String[] autores, String edicao, int anoPublicacao) {

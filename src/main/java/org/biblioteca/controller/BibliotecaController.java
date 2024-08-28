@@ -13,7 +13,7 @@ public class BibliotecaController {
         this.commandFactory = commandFactory;
     }
 
-    public void iniciar(){
+    public void iniciar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem-vindo à Biblioteca. Digite seu comando:");
 

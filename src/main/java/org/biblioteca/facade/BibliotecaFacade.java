@@ -27,16 +27,13 @@ import java.util.Map;
 
 public class BibliotecaFacade {
     private final static int LIMITE_RESERVAS = 3;
-    DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     private final Map<String, Observer> observadores = new HashMap<>();
-
-
     private final EmprestimoService emprestimoService;
     private final ReservaService reservaService;
     private final UsuarioService usuarioService;
     private final ExemplarService exemplarService;
     private final HistoricoService historicoService;
+    DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public BibliotecaFacade(EmprestimoService emprestimoService, ReservaService reservaService, UsuarioService usuarioService, ExemplarService exemplarService, HistoricoService historicoService) {
         this.emprestimoService = emprestimoService;

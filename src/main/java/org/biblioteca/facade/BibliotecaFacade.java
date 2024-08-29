@@ -20,12 +20,15 @@ import org.biblioteca.strategy.EmprestimoComReservaStrategy;
 import org.biblioteca.strategy.EmprestimoSemReservaStrategy;
 import org.biblioteca.strategy.EmprestimoStrategy;
 
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BibliotecaFacade {
     private final static int LIMITE_RESERVAS = 3;
+    DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     private final Map<String, Observer> observadores = new HashMap<>();
 
 
@@ -96,21 +99,26 @@ public class BibliotecaFacade {
     public void adicionarObservacao(String codigoUsuario, String codigoLivro) {
         Livro livro = buscarLivroPorCodigo(codigoLivro);
         Usuario usuario = buscarUsuarioPorCodigo(codigoUsuario);
-        Observer observer = new LivroObserver(codigoUsuario);
-        livro.registrarObserver(observer);
-        observadores.put(codigoUsuario, observer);
-        System.out.println("Observador adicionado com sucesso: " + usuario.getNome() + " está observando " + livro.getTitulo());
+
+        if (usuario.podeObservar()) {
+            Observer observer = new LivroObserver(codigoUsuario);
+            livro.registrarObserver(observer);
+            observadores.put(codigoUsuario, observer);
+            System.out.println("Observador adicionado com sucesso: " + usuario.getNome() + " está observando " + livro.getTitulo());
+        } else {
+            System.out.println("Usuário não tem permissão para observar livros");
+        }
     }
 
     public void consultarInformacoesLivro(String codigoLivro) {
         Livro livro = buscarLivroPorCodigo(codigoLivro);
         System.out.println("Título: " + livro.getTitulo());
+        List<Reserva> reservas = reservaService.buscarReservasPorCodigoLivro(codigoLivro);
         System.out.println("Quantidade de Reservas: " + livro.getReservas());
 
-        if (livro.getReservas() > 0) {
-            System.out.println("Usuários que realizaram reservas:");
-            historicoService.buscarHistoricosPorUsuarioEAcao(codigoLivro, Acao.SOLICITACAO_RESERVA)
-                    .forEach(historico -> System.out.println("- " + historico.getUsuario().getNome()));
+        if (!reservas.isEmpty()) {
+            System.out.println("Usuários que realizaram reservas para o livro");
+            reservas.forEach(reserva -> System.out.println("Nome: " + reserva.getUsuario().getNome() + ", Data da Reserva: " + reserva.getDataTransacao().format(FORMATO_DATA)));
         }
 
         System.out.println("Exemplares:");
@@ -120,48 +128,42 @@ public class BibliotecaFacade {
             if (exemplar.isDisponivel()) {
                 System.out.println("Disponível");
             } else {
-                historicoService.buscarHistoricosPorUsuarioEAcao(exemplar.getId(), Acao.SOLICITACAO_EMPRESTIMO).forEach(historico -> {
-                    if (historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO) {
-                        System.out.println("Emprestado para " + historico.getUsuario().getNome() +
-                                ", Data de Empréstimo: " + historico.getDataTransacao() +
-                                ", Data Prevista para Devolução: " + historico.getDataTransacao());
-                    }
-                });
+                Emprestimo emprestimo = emprestimoService.buscarEmprestimoPorExemplar(exemplar.getId());
+                System.out.println("Emprestado para " + emprestimo.getUsuario().getNome() +
+                        ", Data de Empréstimo: " + emprestimo.getDataTransacao().format(FORMATO_DATA) +
+                        ", Data Prevista para Devolução: " + emprestimo.getDataDevolucao().format(FORMATO_DATA));
             }
         });
-        for (Exemplar exemplar : exemplarService.buscarExemplaresPorCodigoLivro(codigoLivro)) {
-            System.out.print("Código: " + exemplar.getId() + ", Status: ");
-            if (exemplar.isDisponivel()) {
-                System.out.println("Disponível");
-            } else {
-                List<Historico> historicosEmprestimos = historicoService.buscarHistoricosPorUsuarioEAcao(exemplar.getId(), Acao.SOLICITACAO_EMPRESTIMO);
-                for (Historico historico : historicosEmprestimos) {
-                    if (historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO) {
-                        System.out.println("Emprestado para " + historico.getUsuario().getNome() +
-                                ", Data de Empréstimo: " + historico.getDataTransacao() +
-                                ", Data Prevista para Devolução: " + historico.getDataTransacao());
-                    }
-                }
-            }
-        }
     }
 
     public void consultarInformacoesUsuario(String codigoUsuario) {
+        Usuario usuario = buscarUsuarioPorCodigo(codigoUsuario);
+        System.out.println("Nome: " + usuario.getNome());
+        List<Historico> historicosEmprestimos = historicoService.buscarHistoricosEmprestimoPorUsuario(codigoUsuario);
         System.out.println("Empréstimos:");
-        List<Historico> historicosEmprestimos = historicoService.buscarHistoricosPorUsuarioEAcao(codigoUsuario, Acao.SOLICITACAO_EMPRESTIMO);
+        if (historicosEmprestimos.isEmpty()) {
+            System.out.println("Nenhum empréstimo encontrado");
+        }
         historicosEmprestimos.forEach(historico -> {
+            System.out.println("Empréstimos:");
             String status = historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO ? "Finalizado" : "Em curso";
-            String dataDevolucao = historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO ? historico.getDataTransacao().toString() : "N/A";
+            String dataDevolucao = historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO ? historico.getDataTransacao().format(FORMATO_DATA) : "N/A";
             System.out.println("Título: " + historico.getLivro().getTitulo() +
-                    ", Data do Empréstimo: " + historico.getDataTransacao() +
+                    ", Data do Empréstimo: " + historico.getDataTransacao().format(FORMATO_DATA) +
                     ", Status: " + status +
                     ", Data de Devolução: " + dataDevolucao);
         });
 
         System.out.println("Reservas:");
-        List<Historico> historicosReservas = historicoService.buscarHistoricosPorUsuarioEAcao(codigoUsuario, Acao.SOLICITACAO_RESERVA);
-        historicosReservas.forEach(historico -> System.out.println("Título: " + historico.getLivro().getTitulo() +
-                ", Data da Solicitação: " + historico.getDataTransacao()));
+        List<Historico> historicosReservas = historicoService.buscarHistoricosReservaPorUsuario(codigoUsuario);
+        if (historicosReservas.isEmpty()) {
+            System.out.println("Nenhuma reserva encontrada");
+        }
+        historicosReservas.forEach(historico -> {
+            String status = historico.getAcao() == Acao.SOLICITACAO_RESERVA ? "Ativa" : "Finalizada";
+            System.out.println("Título: " + historico.getLivro().getTitulo() +
+                    ", Data da Solicitação: " + historico.getDataTransacao().format(FORMATO_DATA) + ", Status: " + status);
+        });
     }
 
     public void consultarNotificacoes(String codigoUsuario) {

@@ -12,4 +12,6 @@ public interface EmprestimoService extends BaseService<Emprestimo, Long> {
     void verificarSeUsuarioPodeEmprestarMaisLivros(Usuario usuario);
 
     void verificarSeEmprestimoEstaAtivo(String codigoUsuario, String codigoLivro);
+
+    Emprestimo buscarEmprestimoPorExemplar(String codigoExemplar);
 }

@@ -3,6 +3,7 @@ package org.biblioteca.domain.historico;
 import org.biblioteca.config.service.AbstractService;
 import org.biblioteca.domain.transacao.Transacao;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class HistoricoServiceImpl extends AbstractService<Historico, Long> implements HistoricoService {
@@ -21,7 +22,16 @@ public class HistoricoServiceImpl extends AbstractService<Historico, Long> imple
     }
 
     @Override
-    public List<Historico> buscarHistoricosPorUsuarioEAcao(String codigoUsuario, Acao acao) {
-        return historicoRepository.buscarHistoricosPorUsuarioEAcao(codigoUsuario, acao);
+    public List<Historico> buscarHistoricosEmprestimoPorUsuario(String codigoUsuario) {
+        List<Historico> historicos;
+        historicos = historicoRepository.buscarHistoricosPorUsuarioEAcoes(codigoUsuario, Arrays.asList(Acao.SOLICITACAO_EMPRESTIMO, Acao.DEVOLUCAO_EMPRESTIMO));
+        return historicos;
+    }
+
+    @Override
+    public List<Historico> buscarHistoricosReservaPorUsuario(String codigoUsuario) {
+        List<Historico> historicos;
+        historicos = historicoRepository.buscarHistoricosPorUsuarioEAcoes(codigoUsuario, Arrays.asList(Acao.SOLICITACAO_RESERVA, Acao.CANCELAMENTO_RESERVA));
+        return historicos;
     }
 }

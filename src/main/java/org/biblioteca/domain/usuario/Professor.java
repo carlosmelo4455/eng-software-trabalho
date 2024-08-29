@@ -20,4 +20,9 @@ public class Professor extends Usuario {
     public boolean podePegarEmprestado() {
         return true;
     }
+
+    @Override
+    public boolean podeObservar() {
+        return true;
+    }
 }

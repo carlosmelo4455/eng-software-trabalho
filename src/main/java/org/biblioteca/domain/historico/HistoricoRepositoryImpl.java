@@ -17,9 +17,9 @@ public class HistoricoRepositoryImpl extends CacheRepositoryImpl<Historico, Long
     }
 
     @Override
-    public List<Historico> buscarHistoricosPorUsuarioEAcao(String codigoUsuario, Acao acao) {
+    public List<Historico> buscarHistoricosPorUsuarioEAcoes(String codigoUsuario, List<Acao> list) {
         return store.values().stream()
-                .filter(historico -> historico.getUsuario().getId().equals(codigoUsuario) && historico.getAcao().equals(acao))
+                .filter(historico -> historico.getUsuario().getId().equals(codigoUsuario) && list.contains(historico.getAcao()))
                 .toList();
     }
 }

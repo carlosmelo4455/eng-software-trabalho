@@ -9,5 +9,7 @@ public interface HistoricoService extends BaseService<Historico, Long> {
 
     void salvarNoHistorico(Transacao transacao, Acao acao);
 
-    List<Historico> buscarHistoricosPorUsuarioEAcao(String codigoUsuario, Acao acao);
+    List<Historico> buscarHistoricosEmprestimoPorUsuario(String codigoUsuario);
+
+    List<Historico> buscarHistoricosReservaPorUsuario(String codigoUsuario);
 }

@@ -29,4 +29,8 @@ public abstract class Usuario implements Identity<String> {
 
     public abstract boolean podePegarEmprestado();
 
+    public boolean podeObservar() {
+        return false;
+    }
+
 }

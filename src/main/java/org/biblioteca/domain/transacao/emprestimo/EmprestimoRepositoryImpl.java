@@ -30,4 +30,11 @@ public class EmprestimoRepositoryImpl extends CacheRepositoryImpl<Emprestimo, Lo
                 .filter(emprestimo -> emprestimo.getUsuario().getId().equals(codigoUsuario))
                 .toList();
     }
+
+    @Override
+    public Optional<Emprestimo> findEmprestimoPorCodigoExemplar(String codigoExemplar) {
+        return this.findAll().stream()
+                .filter(emprestimo -> emprestimo.getExemplar().getId().equals(codigoExemplar))
+                .findFirst();
+    }
 }

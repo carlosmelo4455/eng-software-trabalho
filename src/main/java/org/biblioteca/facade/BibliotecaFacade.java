@@ -142,7 +142,6 @@ public class BibliotecaFacade {
             System.out.println("Nenhum empréstimo encontrado");
         }
         historicosEmprestimos.forEach(historico -> {
-            System.out.println("Empréstimos:");
             String status = historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO ? "Finalizado" : "Em curso";
             String dataDevolucao = historico.getAcao() == Acao.DEVOLUCAO_EMPRESTIMO ? historico.getDataTransacao().format(FORMATO_DATA) : "N/A";
             System.out.println("Título: " + historico.getLivro().getTitulo() +
@@ -168,7 +167,7 @@ public class BibliotecaFacade {
         if (observer != null) {
             System.out.println("Notificações para o usuário " + codigoUsuario + ": " + observer.getNotificacoes());
         } else {
-            System.out.println("Nenhuma notificação para o usuário " + codigoUsuario);
+            System.out.println("Usuario não registrado como observador");
         }
     }
 
